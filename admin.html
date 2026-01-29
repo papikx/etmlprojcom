@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Quiz ETML</title>
+    <script>
+        document.addEventListener("contextmenu", e => e.preventDefault(), false);
+        document.addEventListener("keydown", e => {
+        // DISABLE CONTROL AND ALL FUNCTION KEYS
+        // if (e.ctrlKey || (e.keyCode>=112 && e.keyCode<=123)) {
+        // DISABLE CONTROL AND F12
+        if (e.ctrlKey || e.keyCode==123) {
+        e.stopPropagation();
+        e.preventDefault();
+}
+});
+    </script>
+
+    <link rel="icon" type="image/x-icon" href="logo1.jfif">
+    <link rel="stylesheet" href="html.css">
+    <style>
+        /* Styles spécifiques pour l'admin encapsulés si besoin, mais utilisant html.css principalement */
+        /* Styles spécifiques pour l'admin encapsulés */
+        .admin-panel {
+            display: none;
+            /* Caché par défaut, montré après login */
+            width: 100%;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Optimization: Override .quiz to allow scrolling on small screens/large content */
+        .quiz {
+            position: relative !important;
+            max-height: 90vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            /* Custom Scrollbar for Premium Feel */
+            scrollbar-width: thin;
+            scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
+        }
+
+        .quiz::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .quiz::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+        }
+
+        .quiz::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+        }
+
+        .quiz::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+
+        .login-panel {
+            width: 100%;
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: white;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        .question-list {
+            /* max-height: 400px; REMOVED for single scrollbar UX */
+            /* overflow-y: auto; REMOVED */
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .question-item {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .delete-btn {
+            background: #ff4444;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            width: auto;
+            margin: 0;
+        }
+
+        .add-form {
+            background: rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        h3 {
+            margin: 10px 0;
+            color: white;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .back-btn {
+            background-color: transparent;
+            border: 1px solid white;
+            margin-bottom: 20px;
+            width: auto;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="quiz">
+        <img src="logo.png" alt="logo" style="width: 100px; display: block; margin: 0 auto;">
+        <h1>ADMINISTRATION</h1>
+
+        <!-- Panneau de Connexion -->
+        <div id="login-panel" class="login-panel">
+            <div class="form-group">
+                <label for="username">Nom d'utilisateur</label>
+                <input type="text" id="username" placeholder="Entrez votre nom">
+            </div>
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
+                <input type="password" id="password" placeholder="Entrez le mot de passe">
+            </div>
+            <button class="btn" onclick="checkLogin()">Se connecter</button>
+            <p id="error-msg" style="color: #ff9393; display: none; margin-top: 10px;">Identifiants pas correct !</p>
+            <a href="index.html" style="color: white; display: block; margin-top: 20px;">Retour au Acceuil</a>
+        </div>
+
+        <!-- Panneau de Gestion (Admin Dashboard) -->
+        <div id="admin-panel" class="admin-panel">
+            <button class="btn back-btn" onclick="logout()">Déconnexion</button>
+
+            <h3>Ajouter une question</h3>
+            <div class="add-form">
+                <div class="form-group">
+                    <label>Question :</label>
+                    <input type="text" id="new-question" placeholder="La question...">
+                </div>
+                <div class="form-group">
+                    <label>Réponse 1 (Correcte ?) <input type="radio" name="correct-answer" value="0"></label>
+                    <input type="text" class="new-answer" placeholder="Réponse 1">
+                </div>
+                <div class="form-group">
+                    <label>Réponse 2 (Correcte ?) <input type="radio" name="correct-answer" value="1"></label>
+                    <input type="text" class="new-answer" placeholder="Réponse 2">
+                </div>
+                <div class="form-group">
+                    <label>Réponse 3 (Correcte ?) <input type="radio" name="correct-answer" value="2"></label>
+                    <input type="text" class="new-answer" placeholder="Réponse 3">
+                </div>
+                <div class="form-group">
+                    <label>Réponse 4 (Correcte ?) <input type="radio" name="correct-answer" value="3"></label>
+                    <input type="text" class="new-answer" placeholder="Réponse 4">
+                </div>
+                <button class="btn" onclick="addQuestion()">Ajouter la question</button>
+            </div>
+
+            <h3>Questions Existantes</h3>
+            <div id="questions-container" class="question-list">
+                <!-- La liste sera générée ici -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts pour l'animation de fond -->
+    <script src="three.r134.min.js"></script>
+    <script src="vanta.net.min.js"></script>
+    <script>
+        VANTA.NET({
+            el: "body",
+            mouseControls: true,
+            touchControls: true,
+            gyroControls: false,
+            minHeight: 200.00,
+            minWidth: 200.00,
+            scale: 1.00,
+            scaleMobile: 1.00,
+            color: 0x800080,
+            points: 16,
+            maxDistance: 20,
+            spacing: 17
+        })
+    </script>
+
+    <!-- Script de logique -->
+    <script src="data.js"></script>
+    <script>
+        // Logique spécifique à l'admin
+
+        /**
+         * Vérifie les identifiants de l'administrateur.
+         * Nom: admin
+         * Mot de passe: etmladmin2026
+         */
+        function checkLogin() {
+            const user = document.getElementById('username').value;
+            const pass = document.getElementById('password').value;
+
+            if (user === 'admin' && pass === 'etmladmin2026') {
+                document.getElementById('login-panel').style.display = 'none';
+                document.getElementById('admin-panel').style.display = 'block';
+                renderQuestions();
+            } else {
+                document.getElementById('error-msg').style.display = 'block';
+            }
+        }
+
+        /**
+         * Déconnecte l'utilisateur et recharge la page.
+         */
+        function logout() {
+            location.reload();
+        }
+
+        /**
+         * Affiche la liste des questions actuelles.
+         */
+        function renderQuestions() {
+            const list = loadQuestions();
+            const container = document.getElementById('questions-container');
+            container.innerHTML = '';
+
+            list.forEach((q, index) => {
+                const div = document.createElement('div');
+                div.className = 'question-item';
+                div.innerHTML = `
+                    <span style="color: white; font-size: 0.9em; flex: 1;">${q.question}</span>
+                    <button class="delete-btn" onclick="deleteQuestion(${index})">X</button>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        /**
+         * Supprime une question par son index.
+         * @param {number} index L'index de la question à supprimer
+         */
+        function deleteQuestion(index) {
+            if (confirm("Êtes-vous sûr de vouloir supprimer cette question ?")) {
+                const list = loadQuestions();
+                list.splice(index, 1);
+                saveQuestions(list);
+                renderQuestions();
+            }
+        }
+
+        /**
+         * Ajoute une nouvelle question à la liste.
+         */
+        function addQuestion() {
+            const questionText = document.getElementById('new-question').value;
+            const answerInputs = document.querySelectorAll('.new-answer');
+            const correctRadio = document.querySelector('input[name="correct-answer"]:checked');
+
+            // Validation simple
+            if (!questionText || !correctRadio) {
+                alert("Veuillez remplir la question et sélectionner la bonne réponse.");
+                return;
+            }
+
+            // Vérifier que toutes les réponses sont remplies
+            let allAnswersFilled = true;
+            answerInputs.forEach(input => {
+                if (!input.value) allAnswersFilled = false;
+            });
+
+            if (!allAnswersFilled) {
+                alert("Veuillez remplir toutes les options de réponse.");
+                return;
+            }
+
+            const answers = [];
+            const correctIndex = parseInt(correctRadio.value);
+
+            answerInputs.forEach((input, index) => {
+                answers.push({
+                    text: input.value,
+                    correct: index === correctIndex
+                });
+            });
+
+            const newQuestion = {
+                question: questionText,
+                answers: answers
+            };
+
+            const list = loadQuestions();
+            list.push(newQuestion);
+            saveQuestions(list);
+
+            // Reset form
+            document.getElementById('new-question').value = '';
+            answerInputs.forEach(input => input.value = '');
+            // correctRadio.checked = false; // keep selection or not?
+
+            alert("Question ajoutée avec succès !");
+            renderQuestions();
+        }
+    </script>
+</body>
+
+</html>
