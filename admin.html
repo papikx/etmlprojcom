@@ -8,14 +8,14 @@
     <script>
         document.addEventListener("contextmenu", e => e.preventDefault(), false);
         document.addEventListener("keydown", e => {
-        // DISABLE CONTROL AND ALL FUNCTION KEYS
-        // if (e.ctrlKey || (e.keyCode>=112 && e.keyCode<=123)) {
-        // DISABLE CONTROL AND F12
-        if (e.ctrlKey || e.keyCode==123) {
-        e.stopPropagation();
-        e.preventDefault();
-}
-});
+            // DISABLE CONTROL AND ALL FUNCTION KEYS
+            // if (e.ctrlKey || (e.keyCode>=112 && e.keyCode<=123)) {
+            // DISABLE CONTROL AND F12
+            if (e.ctrlKey || e.keyCode == 123) {
+                e.stopPropagation();
+                e.preventDefault();
+            }
+        });
     </script>
 
     <link rel="icon" type="image/x-icon" href="logo1.jfif">
@@ -218,16 +218,39 @@
     <script>
         // Logique spécifique à l'admin
 
+        // Configuration JSON pour les identifiants hachés
+        const adminConfig = {
+            "username": "admin",
+            "passwordHash": "be54db4f204cd8f1c65c37207aa3ea69c12e76408268e235ac89f0794b3849b0"
+        };
+
+
         /**
-         * Vérifie les identifiants de l'administrateur.
-         * Nom: admin
-         * Mot de passe: etmladmin2026
+         * Fonction pour hacher une chaîne avec SHA-256
          */
-        function checkLogin() {
+        async function sha256(message) {
+            // Encoder le message en tableau d'octets
+            const msgBuffer = new TextEncoder().encode(message);
+            // Hacher le message
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            // Convertir le tableau de hachage en tableau d'octets
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            // Convertir les octets en chaîne hexadécimale
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex;
+        }
+
+        /**
+         * Vérifie les identifiants de l'administrateur de manière sécurisée.
+         */
+        async function checkLogin() {
             const user = document.getElementById('username').value;
             const pass = document.getElementById('password').value;
 
-            if (user === 'admin' && pass === 'etmladmin2026') {
+            // Hacher le mot de passe saisi pour la comparaison
+            const hashedPass = await sha256(pass);
+
+            if (user === adminConfig.username && hashedPass === adminConfig.passwordHash) {
                 document.getElementById('login-panel').style.display = 'none';
                 document.getElementById('admin-panel').style.display = 'block';
                 renderQuestions();
@@ -247,6 +270,11 @@
          * Affiche la liste des questions actuelles.
          */
         function renderQuestions() {
+            // Check if loadQuestions exists (in case data.js is missing/loading)
+            if (typeof loadQuestions !== 'function') {
+                console.error("loadQuestions function not found. data.js might be missing.");
+                return;
+            }
             const list = loadQuestions();
             const container = document.getElementById('questions-container');
             container.innerHTML = '';
