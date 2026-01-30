@@ -1,245 +1,205 @@
 /**
- * Liste des questions par défaut si le stockage local est vide.
- * Chaque objet contient la question et les rÃ©ponses possibles.
+ * Liste des questions encodÃ©e par defaut (masquÃ©e).
  */
-const defaultQuestions = [
-  {
-    question: "En quelle année l'ETML a été créé?",
-    answers: [
-      { text: "1960", correct: false },
-      { text: "1916", correct: true },
-      { text: "1922", correct: false },
-      { text: "1912", correct: false },
-    ],
-  },
-  {
-    question: "2 + 2 * 2 = ?",
-    answers: [
-      { text: "8", correct: false },
-      { text: "4", correct: false },
-      { text: "6", correct: true },
-      { text: "10", correct: false },
-    ],
-  },
-  {
-    question: "Quelle est la capitale de la Suisse?",
-    answers: [
-      { text: "Berne", correct: true },
-      { text: "Zurich", correct: false },
-      { text: "Geneve", correct: false },
-      { text: "Lausanne", correct: false },
-    ],
-  },
-  {
-    question: "Quel est le langage de programmation le plus utilisé?",
-    answers: [
-      { text: "Python", correct: true },
-      { text: "JavaScript", correct: false },
-      { text: "HTML", correct: false },
-      { text: "C#", correct: false },
-    ],
-  },
-  {
-    question: "Citez le nom de la série de livres la plus vendue du 21e siècle",
-    answers: [
-      { text: "Le Seigneur des Anneaux", correct: false },
-      { text: "Harry Potter", correct: true },
-      { text: "Twilight", correct: false },
-      { text: "Le Trône de Fer", correct: false },
-    ],
-  },
-  {
-    question: "Quelle est la planète la plus proche du soleil?",
-    answers: [
-      { text: "Vénus", correct: false },
-      { text: "Terre", correct: false },
-      { text: "Mars", correct: false },
-      { text: "Mercure", correct: true },
-    ],
-  },
-  {
-    question: "Qui a peint la Joconde?",
-    answers: [
-      { text: "Leonardo da Vinci", correct: true },
-      { text: "Pablo Picasso", correct: false },
-      { text: "Vincent van Gogh", correct: false },
-      { text: "Michelangelo", correct: false },
-    ],
-  },
-  {
-    question: "Quelle est la langue la plus parlée dans le monde?",
-    answers: [
-      { text: "Anglais", correct: false },
-      { text: "Mandarin", correct: true },
-      { text: "Espagnol", correct: false },
-      { text: "Hindi", correct: false },
-    ],
-  },
-  {
-    question: "Quel est l'élément chimique avec le symbole 'O'?",
-    answers: [
-      { text: "Or", correct: false },
-      { text: "Osmium", correct: false },
-      { text: "Oxygène", correct: true },
-      { text: "Oganesson", correct: false },
-    ],
-  },
-  {
-    question: "Combien y-a-t il de métiers dans ETML?",
-    answers: [
-      { text: "7", correct: true },
-      { text: "5", correct: false },
-      { text: "8", correct: false },
-      { text: "4", correct: false },
-    ],
-  },
-  {
-    question: "Quel est le plus grand océan du monde?",
-    answers: [
-      { text: "Océan Indien", correct: false },
-      { text: "Océan Arctique", correct: false },
-      { text: "Océan Atlantique", correct: false },
-      { text: "Océan Pacifique", correct: true },
-    ],
-  },
-  {
-    question: "Qui a écrit 'Roméo et Juliette'?",
-    answers: [
-      { text: "William Shakespeare", correct: true },
-      { text: "Mark Twain", correct: false },
-      { text: "Jane Austen", correct: false },
-      { text: "Charles Dickens", correct: false },
-    ],
-  },
-  {
-    question: "Dans quel sport peut-on marquer un touchdown ?",
-    answers: [
-      { text: "Rugby", correct: false },
-      { text: "Basketball", correct: false },
-      { text: "Football Américain", correct: true },
-      { text: "Hockey", correct: false },
-    ],
-  },
-  {
-    question: "Quel numéro d’urgence est valable dans toute l’Europe ?",
-    answers: [
-      { text: "911", correct: false },
-      { text: "112", correct: true },
-      { text: "999", correct: false },
-      { text: "110", correct: false },
-    ],
-  },
-  {
-    question: "Quel est l’organe principal du système nerveux ?",
-    answers: [
-      { text: "Le cœur", correct: false },
-      { text: "Le foie", correct: false },
-      { text: "Les poumons", correct: false },
-      { text: "Le cerveau", correct: true },
-    ],
-  },
-  {
-    question: "Combien de couleurs trouve-t-on dans un sachet normal de M&Ms ?",
-    answers: [
-      { text: "6", correct: true },
-      { text: "4", correct: false },
-      { text: "8", correct: false },
-      { text: "7", correct: false },
-    ]
-  },
-  {
-    question: "Quel animal figure sur le logo de Porsche ?",
-    answers: [
-      { text: "Le lion", correct: false },
-      { text: "Le tigre", correct: false },
-      { text: "Le cheval", correct: true },
-      { text: "Le taureau", correct: false },
-    ]
-  },
-  {
-    question: "Combien d'os les requins ont-ils",
-    answers: [
-      { text: "0", correct: true },
-      { text: "268", correct: false },
-      { text: "68", correct: false },
-      { text: "100", correct: false },
-    ]
-  },
-  {
-    question: "Quelle grande ville a mis en service la première ligne urbaine de tramway en 1832 ?",
-    answers: [
-      { text: "New-York", correct: true },
-      { text: "Berlin", correct: false },
-      { text: "Londres", correct: false },
-      { text: "Vienne", correct: false },
-    ]
-  },
-  {
-    question: "Quelle ville a accueilli les Jeux olympiques d'hiver de 2014 ?",
-    answers: [
-      { text: "Pékin, Chine", correct: false },
-      { text: "Paris, France", correct: false },
-      { text: "Sotchi, Russie", correct: true },
-      { text: "Tokyo, Japon", correct: false },
-    ]
-  },
-  {
-    question: "Quelle planète gazeuse est la plus volumineuse de notre Système solaire ?",
-    answers: [
-      { text: "Jupiter", correct: true },
-      { text: "Neptune", correct: false },
-      { text: "Uranus", correct: false },
-      { text: "Saturne", correct: false },
-    ]
-  },
-  {
-    question: "Quel animal peut vivre plusieurs jours sans tête ?",
-    answers: [
-      { text: "Le canard", correct: false },
-      { text: "La poule", correct: false },
-      { text: "Le cafard", correct: true },
-      { text: "La fourmi", correct: false },
-    ]
-  },
-  {
-    question: "Quel est l'animal le plus mortel au monde ?",
-    answers : [
-      { text: "Le serpent", correct: false },
-      { text: "L'éléphant", correct: false },
-      { text: "Le tigre", correct: false },
-      { text: "Le moustique", correct: true },
-    ]
-  },
-  {
-    question: "Quel est l’animal national de l’Australie ?",
-    answers: [
-      { text: "Le tigre", correct: false },
-      { text: "Le chat", correct: false },
-      { text: "Le lion", correct: false },
-      { text: "Le kangourou", correct: true },
-    ]
+const encryptedDefaultQuestions = `
+Ww0KICB7DQogICAgInF1ZXN0aW9uIjogIkVuIHF1ZWxsZSBhbm7DqWUgbCdFVE1MIGEgw6l0w6kg
+Y3LDqcOpPyIsDQogICAgImFuc3dlcnMiOiBbDQogICAgICB7ICJ0ZXh0IjogIjE5NjAiLCAiY29y
+cmVjdCI6IGZhbHNlIH0sDQogICAgICB7ICJ0ZXh0IjogIjE5MTYiLCAiY29ycmVjdCI6IHRydWUg
+fSwNCiAgICAgIHsgInRleHQiOiAiMTkyMiIsICJjb3JyZWN0IjogZmFsc2UgfSwNCiAgICAgIHsg
+InRleHQiOiAiMTkxMiIsICJjb3JyZWN0IjogZmFsc2UgfQ0KICAgIF0NCiAgfSwNCiAgew0KICAg
+ICJxdWVzdGlvbiI6ICIyICsgMiAqIDIgPSA/IiwNCiAgICAiYW5zd2VycyI6IFsNCiAgICAgIHsg
+InRleHQiOiAiOCIsICJjb3JyZWN0IjogZmFsc2UgfSwNCiAgICAgIHsgInRleHQiOiAiNCIsICJj
+b3JyZWN0IjogZmFsc2UgfSwNCiAgICAgIHsgInRleHQiOiAiNiIsICJjb3JyZWN0IjogdHJ1ZSB9
+LA0KICAgICAgeyAidGV4dCI6ICIxMCIsICJjb3JyZWN0IjogZmFsc2UgfQ0KICAgIF0NCiAgfSwN
+CiAgew0KICAgICJxdWVzdGlvbiI6ICJRdWVsbGUgZXN0IGxhIGNhcGl0YWxlIGRlIGxhIFN1aXNz
+ZT8iLA0KICAgICJhbnN3ZXJzIjogWw0KICAgICAgeyAidGV4dCI6ICJCZXJuZSIsICJjb3JyZWN0
+IjogdHJ1ZSB9LA0KICAgICAgeyAidGV4dCI6ICJadXJpY2giLCAiY29ycmVjdCI6IGZhbHNlIH0s
+DQogICAgICB7ICJ0ZXh0IjogIkdlbmV2ZSIsICJjb3JyZWN0IjogZmFsc2UgfSwNCiAgICAgIHsg
+InRleHQiOiAiTGF1c2FubmUiLCAiY29ycmVjdCI6IGZhbHNlIH0NCiAgICBdDQogIH0sDQogIHsN
+CiAgICAicXVlc3Rpb24iOiAiUXVlbCBlc3QgbGUgbGFuZ2FnZSBkZSBwcm9ncmFtbWF0aW9uIGxl
+IHBsdXMgdXRpbGlzw6k/IiwNCiAgICAiYW5zd2VycyI6IFsNCiAgICAgIHsgInRleHQiOiAiUHl0
+aG9uIiwgImNvcnJlY3QiOiB0cnVlIH0sDQogICAgICB7ICJ0ZXh0IjogIkphdmFTY3JpcHQiLCAi
+Y29ycmVjdCI6IGZhbHNlIH0sDQogICAgICB7ICJ0ZXh0IjogIkhUTUwiLCAiY29ycmVjdCI6IGZh
+bHNlIH0sDQogICAgICB7ICJ0ZXh0IjogIkMjIiwgImNvcnJlY3QiOiBmYWxzZSB9DQogICAgXQ0K
+ICB9LA0KICB7DQogICAgInF1ZXN0aW9uIjogIkNpdGV6IGxlIG5vbSBkZSBsYSBzw6lyaWUgZGUg
+bGl2cmVzIGxhIHBsdXMgdmVuZHVlIGR1IDIxZSBzacOoY2xlIiwNCiAgICAiYW5zd2VycyI6IFsN
+CiAgICAgIHsgInRleHQiOiAiTGUgU2VpZ25ldXIgZGVzIEFubmVhdXgiLCAiY29ycmVjdCI6IGZh
+bHNlIH0sDQogICAgICB7ICJ0ZXh0IjogIkhhcnJ5IFBvdHRlciIsICJjb3JyZWN0IjogdHJ1ZSB9
+LA0KICAgICAgeyAidGV4dCI6ICJUd2lsaWdodCIsICJjb3JyZWN0IjogZmFsc2UgfSwNCiAgICAg
+IHsgInRleHQiOiAiTGUgVHLDtG5lIGRlIEZlciIsICJjb3JyZWN0IjogZmFsc2UgfQ0KICAgIF0N
+CiAgfSwNCiAgew0KICAgICJxdWVzdGlvbiI6ICJRdWVsbGUgZXN0IGxhIHBsYW7DqHRlIGxhIHBs
+dXMgcHJvY2hlIGR1IHNvbGVpbD8iLA0KICAgICJhbnN3ZXJzIjogWw0KICAgICAgeyAidGV4dCI6
+ICJWw6ludXMiLCAiY29ycmVjdCI6IGZhbHNlIH0sDQogICAgICB7ICJ0ZXh0IjogIlRlcnJlIiwg
+ImNvcnJlY3QiOiBmYWxzZSB9LA0KICAgICAgeyAidGV4dCI6ICJNYXJzIiwgImNvcnJlY3QiOiBm
+YWxzZSB9LA0KICAgICAgeyAidGV4dCI6ICJNZXJjdXJlIiwgImNvcnJlY3QiOiB0cnVlIH0NCiAg
+ICBdDQogIH0sDQogIHsNCiAgICAicXVlc3Rpb24iOiAiUXVpIGEgcGVpbnQgbGEgSm9jb25kZT8i
+LA0KICAgICJhbnN3ZXJzIjogWw0KICAgICAgeyAidGV4dCI6ICJMZW9uYXJkbyBkYSBWaW5jaSIs
+ICJjb3JyZWN0IjogdHJ1ZSB9LA0KICAgICAgeyAidGV4dCI6ICJQYWJsbyBQaWNhc3NvIiwgImNv
+cnJlY3QiOiBmYWxzZSB9LA0KICAgICAgeyAidGV4dCI6ICJWaW5jZW50IHZhbiBHb2doIiwgImNv
+cnJlY3QiOiBmYWxzZSB9LA0KICAgICAgeyAidGV4dCI6ICJNaWNoZWxhbmdlbG8iLCAiY29ycmVj
+dCI6IGZhbHNlIH0NCiAgICBdDQogIH0sDQogIHsNCiAgICAicXVlc3Rpb24iOiAiUXVlbGxlIGVz
+dCBsYSBsYW5ndWUgbGEgcGx1cyBwYXJsw6llIGRhbnMgbGUgbW9uZGU/IiwNCiAgICAiYW5zd2Vy
+cyI6IFsNCiAgICAgIHsgInRleHQiOiAiQW5nbGFpcyIsICJjb3JyZWN0IjogZmFsc2UgfSwNCiAg
+ICAgIHsgInRleHQiOiAiTWFuZGFyaW4iLCAiY29ycmVjdCI6IHRydWUgfSwNCiAgICAgIHsgInRl
+eHQiOiAiRXNwYWdub2wiLCAiY29ycmVjdCI6IGZhbHNlIH0sDQogICAgICB7ICJ0ZXh0IjogIkhp
+bmRpIiwgImNvcnJlY3QiOiBmYWxzZSB9DQogICAgXQ0KICB9LA0KICB7DQogICAgInF1ZXN0aW9u
+IjogIlF1ZWwgZXN0IGwnw6lsw6ltZW50IGNoaW1pcXVlIGF2ZWMgbGUgc3ltYm9sZSAnTyc/IiwN
+CiAgICAiYW5zd2VycyI6IFsNCiAgICAgIHsgInRleHQiOiAiT3IiLCAiY29ycmVjdCI6IGZhbHNl
+IH0sDQogICAgICB7ICJ0ZXh0IjogIk9zbWl1bSIsICJjb3JyZWN0IjogZmFsc2UgfSwNCiAgICAg
+IHsgInRleHQiOiAiT3h5Z8OobmUiLCAiY29ycmVjdCI6IHRydWUgfSwNCiAgICAgIHsgInRleHQi
+OiAiT2dhbmVzc29uIiwgImNvcnJlY3QiOiBmYWxzZSB9DQogICAgXQ0KICB9LA0KICB7DQogICAg
+InF1ZXN0aW9uIjogIkNvbWJpZW4geS1hLXQgaWwgZGUgbcOpdGllcnMgZGFucyBFVE1MPyIsDQog
+ICAgImFuc3dlcnMiOiBbDQogICAgICB7ICJ0ZXh0IjogIjciLCAiY29ycmVjdCI6IHRydWUgfSwN
+CiAgICAgIHsgInRleHQiOiAiNSIsICJjb3JyZWN0IjogZmFsc2UgfSwNCiAgICAgIHsgInRleHQi
+OiAiOCIsICJjb3JyZWN0IjogZmFsc2UgfSwNCiAgICAgIHsgInRleHQiOiAiNCIsICJjb3JyZWN0
+IjogZmFsc2UgfQ0KICAgIF0NCiAgfSwNCiAgew0KICAgICJxdWVzdGlvbiI6ICJRdWVsIGVzdCBs
+ZSBwbHVzIGdyYW5kIG9jw6lhbiBkdSBtb25kZT8iLA0KICAgICJhbnN3ZXJzIjogWw0KICAgICAg
+eyAidGV4dCI6ICJPY8OpYW4gSW5kaWVuIiwgImNvcnJlY3QiOiBmYWxzZSB9LA0KICAgICAgeyAi
+dGV4dCI6ICJPY8OpYW4gQXJjdGlxdWUiLCAiY29ycmVjdCI6IGZhbHNlIH0sDQogICAgICB7ICJ0
+ZXh0IjogIk9jw6lhbiBBdGxhbnRpcXVlIiwgImNvcnJlY3QiOiBmYWxzZSB9LA0KICAgICAgeyAi
+dGV4dCI6ICJPY8OpYW4gUGFjaWZpcXVlIiwgImNvcnJlY3QiOiB0cnVlIH0NCiAgICBdDQogIH0s
+DQogIHsNCiAgICAicXVlc3Rpb24iOiAiUXVpIGEgw6ljcml0ICdSb23DqW8gZXQgSnVsaWV0dGUn
+PyIsDQogICAgImFuc3dlcnMiOiBbDQogICAgICB7ICJ0ZXh0IjogIldpbGxpYW0gU2hha2VzcGVh
+cmUiLCAiY29ycmVjdCI6IHRydWUgfSwNCiAgICAgIHsgInRleHQiOiAiTWFyayBUd2FpbiIsICJj
+b3JyZWN0IjogZmFsc2UgfSwNCiAgICAgIHsgInRleHQiOiAiSmFuZSBBdXN0ZW4iLCAiY29ycmVj
+dCI6IGZhbHNlIH0sDQogICAgICB7ICJ0ZXh0IjogIkNoYXJsZXMgRGlja2VucyIsICJjb3JyZWN0
+IjogZmFsc2UgfQ0KICAgIF0NCiAgfSwNCiAgew0KICAgICJxdWVzdGlvbiI6ICJEYW5zIHF1ZWwg
+c3BvcnQgcGV1dC1vbiBtYXJxdWVyIHVuIHRvdWNoZG93biA/IiwNCiAgICAiYW5zd2VycyI6IFsN
+CiAgICAgIHsgInRleHQiOiAiUnVnYnkiLCAiY29ycmVjdCI6IGZhbHNlIH0sDQogICAgICB7ICJ0
+ZXh0IjogIkJhc2tldGJhbGwiLCAiY29ycmVjdCI6IGZhbHNlIH0sDQogICAgICB7ICJ0ZXh0Ijog
+IkZvb3RiYWxsIEFtw6lyaWNhaW4iLCAiY29ycmVjdCI6IHRydWUgfSwNCiAgICAgIHsgInRleHQi
+OiAiSG9ja2V5IiwgImNvcnJlY3QiOiBmYWxzZSB9DQogICAgXQ0KICB9LA0KICB7DQogICAgInF1
+ZXN0aW9uIjogIlF1ZWwgbnVtw6lybyBk4oCZdXJnZW5jZSBlc3QgdmFsYWJsZSBkYW5zIHRvdXRl
+IGzigJlFdXJvcGUgPyIsDQogICAgImFuc3dlcnMiOiBbDQogICAgICB7ICJ0ZXh0IjogIjkxMSIs
+ICJjb3JyZWN0IjogZmFsc2UgfSwNCiAgICAgIHsgInRleHQiOiAiMTEyIiwgImNvcnJlY3QiOiB0
+cnVlIH0sDQogICAgICB7ICJ0ZXh0IjogIjk5OSIsICJjb3JyZWN0IjogZmFsc2UgfSwNCiAgICAg
+IHsgInRleHQiOiAiMTEwIiwgImNvcnJlY3QiOiBmYWxzZSB9DQogICAgXQ0KICB9LA0KICB7DQog
+ICAgInF1ZXN0aW9uIjogIlF1ZWwgZXN0IGzigJlvcmdhbmUgcHJpbmNpcGFsIGR1IHN5c3TDqG1l
+IG5lcnZldXggPyIsDQogICAgImFuc3dlcnMiOiBbDQogICAgICB7ICJ0ZXh0IjogIkxlIGPFk3Vy
+IiwgImNvcnJlY3QiOiBmYWxzZSB9LA0KICAgICAgeyAidGV4dCI6ICJMZSBmb2llIiwgImNvcnJl
+Y3QiOiBmYWxzZSB9LA0KICAgICAgeyAidGV4dCI6ICJMZXMgcG91bW9ucyIsICJjb3JyZWN0Ijog
+ZmFsc2UgfSwNCiAgICAgIHsgInRleHQiOiAiTGUgY2VydmVhdSIsICJjb3JyZWN0IjogdHJ1ZSB9
+DQogICAgXQ0KICB9LA0KICB7DQogICAgInF1ZXN0aW9uIjogIkNvbWJpZW4gZGUgY291bGV1cnMg
+dHJvdXZlLXQtb24gZGFucyB1biBzYWNoZXQgbm9ybWFsIGRlIE0mTXMgPyIsDQogICAgImFuc3dl
+cnMiOiBbDQogICAgICB7ICJ0ZXh0IjogIjYiLCAiY29ycmVjdCI6IHRydWUgfSwNCiAgICAgIHsg
+InRleHQiOiAiNCIsICJjb3JyZWN0IjogZmFsc2UgfSwNCiAgICAgIHsgInRleHQiOiAiOCIsICJj
+b3JyZWN0IjogZmFsc2UgfSwNCiAgICAgIHsgInRleHQiOiAiNyIsICJjb3JyZWN0IjogZmFsc2Ug
+fQ0KICAgIF0NCiAgfSwNCiAgew0KICAgICJxdWVzdGlvbiI6ICJRdWVsIGFuaW1hbCBmaWd1cmUg
+c3VyIGxlIGxvZ28gZGUgUG9yc2NoZSA/IiwNCiAgICAiYW5zd2VycyI6IFsNCiAgICAgIHsgInRl
+eHQiOiAiTGUgbGlvbiIsICJjb3JyZWN0IjogZmFsc2UgfSwNCiAgICAgIHsgInRleHQiOiAiTGUg
+dGlncmUiLCAiY29ycmVjdCI6IGZhbHNlIH0sDQogICAgICB7ICJ0ZXh0IjogIkxlIGNoZXZhbCIs
+ICJjb3JyZWN0IjogdHJ1ZSB9LA0KICAgICAgeyAidGV4dCI6ICJMZSB0YXVyZWF1IiwgImNvcnJl
+Y3QiOiBmYWxzZSB9DQogICAgXQ0KICB9LA0KICB7DQogICAgInF1ZXN0aW9uIjogIkNvbWJpZW4g
+ZCdvcyBsZXMgcmVxdWlucyBvbnQtaWxzIiwNCiAgICAiYW5zd2VycyI6IFsNCiAgICAgIHsgInRl
+eHQiOiAiMCIsICJjb3JyZWN0IjogdHJ1ZSB9LA0KICAgICAgeyAidGV4dCI6ICIyNjgiLCAiY29y
+cmVjdCI6IGZhbHNlIH0sDQogICAgICB7ICJ0ZXh0IjogIjY4IiwgImNvcnJlY3QiOiBmYWxzZSB9
+LA0KICAgICAgeyAidGV4dCI6ICIxMDAiLCAiY29ycmVjdCI6IGZhbHNlIH0NCiAgICBdDQogIH0s
+DQogIHsNCiAgICAicXVlc3Rpb24iOiAiUXVlbGxlIGdyYW5kZSB2aWxsZSBhIG1pcyBlbiBzZXJ2
+aWNlIGxhIHByZW1pw6hyZSBsaWduZSB1cmJhaW5lIGRlIHRyYW13YXkgZW4gMTgzMiA/IiwNCiAg
+ICAiYW5zd2VycyI6IFsNCiAgICAgIHsgInRleHQiOiAiTmV3LVlvcmsiLCAiY29ycmVjdCI6IHRy
+dWUgfSwNCiAgICAgIHsgInRleHQiOiAiQmVybGluIiwgImNvcnJlY3QiOiBmYWxzZSB9LA0KICAg
+ICAgeyAidGV4dCI6ICJMb25kcmVzIiwgImNvcnJlY3QiOiBmYWxzZSB9LA0KICAgICAgeyAidGV4
+dCI6ICJWaWVubmUiLCAiY29ycmVjdCI6IGZhbHNlIH0NCiAgICBdDQogIH0sDQogIHsNCiAgICAi
+cXVlc3Rpb24iOiAiUXVlbGxlIHZpbGxlIGEgYWNjdWVpbGxpIGxlcyBKZXV4IG9seW1waXF1ZXMg
+ZCdoaXZlciBkZSAyMDE0ID8iLA0KICAgICJhbnN3ZXJzIjogWw0KICAgICAgeyAidGV4dCI6ICJQ
+w6lraW4sIENoaW5lIiwgImNvcnJlY3QiOiBmYWxzZSB9LA0KICAgICAgeyAidGV4dCI6ICJQYXJp
+cywgRnJhbmNlIiwgImNvcnJlY3QiOiBmYWxzZSB9LA0KICAgICAgeyAidGV4dCI6ICJTb3RjaGks
+IFJ1c3NpZSIsICJjb3JyZWN0IjogdHJ1ZSB9LA0KICAgICAgeyAidGV4dCI6ICJUb2t5bywgSmFw
+b24iLCAiY29ycmVjdCI6IGZhbHNlIH0NCiAgICBdDQogIH0sDQogIHsNCiAgICAicXVlc3Rpb24i
+OiAiUXVlbGxlIHBsYW7DqHRlIGdhemV1c2UgZXN0IGxhIHBsdXMgdm9sdW1pbmV1c2UgZGUgbm90
+cmUgU3lzdMOobWUgc29sYWlyZSA/IiwNCiAgICAiYW5zd2VycyI6IFsNCiAgICAgIHsgInRleHQi
+OiAiSnVwaXRlciIsICJjb3JyZWN0IjogdHJ1ZSB9LA0KICAgICAgeyAidGV4dCI6ICJOZXB0dW5l
+IiwgImNvcnJlY3QiOiBmYWxzZSB9LA0KICAgICAgeyAidGV4dCI6ICJVcmFudXMiLCAiY29ycmVj
+dCI6IGZhbHNlIH0sDQogICAgICB7ICJ0ZXh0IjogIlNhdHVybmUiLCAiY29ycmVjdCI6IGZhbHNl
+IH0NCiAgICBdDQogIH0sDQogIHsNCiAgICAicXVlc3Rpb24iOiAiUXVlbCBhbmltYWwgcGV1dCB2
+aXZyZSBwbHVzaWV1cnMgam91cnMgc2FucyB0w6p0ZSA/IiwNCiAgICAiYW5zd2VycyI6IFsNCiAg
+ICAgIHsgInRleHQiOiAiTGUgY2FuYXJkIiwgImNvcnJlY3QiOiBmYWxzZSB9LA0KICAgICAgeyAi
+dGV4dCI6ICJMYSBwb3VsZSIsICJjb3JyZWN0IjogZmFsc2UgfSwNCiAgICAgIHsgInRleHQiOiAi
+TGUgY2FmYXJkIiwgImNvcnJlY3QiOiB0cnVlIH0sDQogICAgICB7ICJ0ZXh0IjogIkxhIGZvdXJt
+aSIsICJjb3JyZWN0IjogZmFsc2UgfQ0KICAgIF0NCiAgfSwNCiAgew0KICAgICJxdWVzdGlvbiI6
+ICJRdWVsIGVzdCBsJ2FuaW1hbCBsZSBwbHVzIG1vcnRlbCBhdSBtb25kZSA/IiwNCiAgICAiYW5z
+d2VycyI6IFsNCiAgICAgIHsgInRleHQiOiAiTGUgc2VycGVudCIsICJjb3JyZWN0IjogZmFsc2Ug
+fSwNCiAgICAgIHsgInRleHQiOiAiTCfDqWzDqXBoYW50IiwgImNvcnJlY3QiOiBmYWxzZSB9LA0K
+ICAgICAgeyAidGV4dCI6ICJMZSB0aWdyZSIsICJjb3JyZWN0IjogZmFsc2UgfSwNCiAgICAgIHsg
+InRleHQiOiAiTGUgbW91c3RpcXVlIiwgImNvcnJlY3QiOiB0cnVlIH0NCiAgICBdDQogIH0sDQog
+IHsNCiAgICAicXVlc3Rpb24iOiAiUXVlbCBlc3QgbOKAmWFuaW1hbCBuYXRpb25hbCBkZSBs4oCZ
+QXVzdHJhbGllID8iLA0KICAgICJhbnN3ZXJzIjogWw0KICAgICAgeyAidGV4dCI6ICJMZSB0aWdy
+ZSIsICJjb3JyZWN0IjogZmFsc2UgfSwNCiAgICAgIHsgInRleHQiOiAiTGUgY2hhdCIsICJjb3Jy
+ZWN0IjogZmFsc2UgfSwNCiAgICAgIHsgInRleHQiOiAiTGUgbGlvbiIsICJjb3JyZWN0IjogZmFs
+c2UgfSwNCiAgICAgIHsgInRleHQiOiAiTGUga2FuZ291cm91IiwgImNvcnJlY3QiOiB0cnVlIH0N
+CiAgICBdDQogIH0NCl0NCg==
+`;
+ 
+/**
+ * Fonction pour encoder en base64 (UTF-8 safe)
+ */
+function encryptJSON(data) {
+  const json = JSON.stringify(data);
+  const encoder = new TextEncoder();
+  const bytes = encoder.encode(json);
+  let binary = '';
+  for (let i = 0; i < bytes.length; i++) {
+    binary += String.fromCharCode(bytes[i]);
   }
-];
-
+  return btoa(binary);
+}
+ 
+/**
+ * Fonction pour dÃ©coder du base64 (UTF-8 safe)
+ */
+function decryptJSON(cipher) {
+  // Enlever les retours Ã  la ligne et espaces
+  const cleanCipher = cipher.replace(/\s/g, '');
+  if (!cleanCipher) return [];
+ 
+  try {
+    const binary = atob(cleanCipher);
+    const bytes = new Uint8Array(binary.length);
+    for (let i = 0; i < binary.length; i++) {
+      bytes[i] = binary.charCodeAt(i);
+    }
+    const decoder = new TextDecoder();
+    return JSON.parse(decoder.decode(bytes));
+  } catch (e) {
+    console.error("Erreur de dÃ©cryptage des donnÃ©es", e);
+    return [];
+  }
+}
+ 
 /**
  * Fonction pour charger les questions.
- * Essaie de récupérer les données depuis le localStorage.
- * Si aucune donnée n'est trouvée, retourne les questions par défaut.
  * @returns {Array} Liste des questions
  */
 function loadQuestions() {
   const storedQuestions = localStorage.getItem("quizQuestions");
+ 
   if (storedQuestions) {
-    return JSON.parse(storedQuestions);
+    // Si Ã§a commence par '[', c'est l'ancien format (texte clair)
+    // On le gÃ¨re pour la rÃ©trocompatibilitÃ© (ou migration immÃ©diate)
+    if (storedQuestions.trim().startsWith('[')) {
+       try {
+         const parsed = JSON.parse(storedQuestions);
+         // Optionnel: Migrer tout de suite en cryptÃ© pour la prochaine fois ?
+         // saveQuestions(parsed);
+         return parsed;
+       } catch(e) { }
+    }
+   
+    // Sinon on essaie de dÃ©crypter
+    const decoded = decryptJSON(storedQuestions);
+    if (decoded && Array.isArray(decoded)) return decoded;
   }
-  return defaultQuestions;
+ 
+  // Utiliser les questions par dÃ©faut (dÃ©cryptÃ©es Ã  la volÃ©e)
+  return decryptJSON(encryptedDefaultQuestions);
 }
-
+ 
 /**
  * Fonction pour sauvegarder les questions.
- * Enregistre la liste des questions dans le localStorage.
- * @param {Array} questions Liste des questions à sauvegarder
+ * @param {Array} questions Liste des questions Ã  sauvegarder
  */
 function saveQuestions(questions) {
-  localStorage.setItem("quizQuestions", JSON.stringify(questions));
+  const encrypted = encryptJSON(questions);
+  localStorage.setItem("quizQuestions", encrypted);
 }
+ 
